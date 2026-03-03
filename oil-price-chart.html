@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>石油价格历史分析</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 900px; margin: 0 auto; padding: 20px; background: #f5f5f5; }
+        .container { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #333; border-bottom: 2px solid #007bff 10px;; padding-bottom: }
+        h2 { color: #555; margin-top: 30px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { padding: 12px; text-align: center; border: 1px solid #ddd; }
+        th { background: #007bff; color: white; }
+        tr:nth-child(even) { background: #f9f9f9; }
+        .positive { color: #28a745; }
+        .negative { color: #dc3545; }
+        .chart-container { margin: 30px 0; }
+        .summary { background: #e7f3ff; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .footer { text-align: center; color: #888; font-size: 12px; margin-top: 30px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛢️ 石油价格历史分析报告</h1>
+        
+        <h2>📊 年度平均价格数据 (布伦特原油)</h2>
+        <table>
+            <tr>
+                <th>年份</th>
+                <th>价格 (美元/桶)</th>
+                <th>同比变化</th>
+            </tr>
+            <tr>
+                <td>2020</td>
+                <td>$71.30</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>2021</td>
+                <td>$78.36</td>
+                <td class="positive">+9.9%</td>
+            </tr>
+            <tr>
+                <td>2022</td>
+                <td>$89.50</td>
+                <td class="positive">+14.2%</td>
+            </tr>
+            <tr>
+                <td>2023</td>
+                <td>$84.72</td>
+                <td class="negative">-5.3%</td>
+            </tr>
+            <tr>
+                <td>2024</td>
+                <td>$82.00</td>
+                <td class="negative">-3.2%</td>
+            </tr>
+            <tr>
+                <td>2025</td>
+                <td>$69.14</td>
+                <td class="negative">-15.7%</td>
+            </tr>
+        </table>
+
+        <div class="chart-container">
+            <canvas id="oilPriceChart"></canvas>
+        </div>
+
+        <h2>📈 分析要点</h2>
+        <div class="summary">
+            <h3>1. 2020年：疫情冲击</h3>
+            <p>COVID-19疫情导致全球需求暴跌，年初价格剧烈波动，一度跌至负值，全年平均 $71.30</p>
+            
+            <h3>2. 2021-2022年：复苏与冲突</h3>
+            <p>2021年需求回暖，价格回升至 $78.36。2022年俄乌冲突爆发，能源危机推动价格飙升至 $89.50 (历史高位)</p>
+            
+            <h3>3. 2023-2024年：高位回落</h3>
+            <p>冲突影响减弱，供应紧张缓解，价格逐步回落至 $82 左右，OPEC+减产支撑价格</p>
+            
+            <h3>4. 2025年：价格下行</h3>
+            <p>全球经济增长放缓，新能源替代效应增强，价格预计继续承压</p>
+        </div>
+
+        <h2>🔍 关键结论</h2>
+        <ul>
+            <li><strong>价格波动性加大</strong>：2020-2025年间油价经历了剧烈波动，反映地缘政治对能源市场的深远影响</li>
+            <li><strong>长期趋势向下</strong>：从2022年峰值回落，整体呈下降趋势</li>
+            <li><strong>影响因素多元</strong>：疫情、战争、OPEC+政策、全球经济都是重要变量</li>
+        </ul>
+
+        <div class="footer">
+            <p>数据来源: EIA, Statista, Trading Economics, Macrotrends | 生成时间: 2026-03-03</p>
+        </div>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('oilPriceChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['2020', '2021', '2022', '2023', '2024', '2025'],
+                datasets: [{
+                    label: '布伦特原油价格 (美元/桶)',
+                    data: [71.30, 78.36, 89.50, 84.72, 82.00, 69.14],
+                    borderColor: '#007bff',
+                    backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                    fill: true,
+                    tension: 0.3,
+                    pointRadius: 8,
+                    pointBackgroundColor: '#007bff',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top' },
+                    title: { display: true, text: '布伦特原油年度平均价格走势 (2020-2025)' }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 50,
+                        title: { display: true, text: '美元/桶' }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
